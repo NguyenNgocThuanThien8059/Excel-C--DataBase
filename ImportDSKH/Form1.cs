@@ -42,6 +42,23 @@ namespace ImportDSKH
                 }
             }
         }
+        private void KTKH(List<DanhSachKH> B)
+        {
+            int i = 0;
+            foreach(var item in B)
+            {
+                if(item.MaKH == dataGridView1.Rows[i].Cells[1].Value.ToString())
+                {
+                    dataGridView1.Rows[i].Cells[0].Value = " Cập nhật ";
+                    i++;
+                }
+            }
+            for(int j = i; j < dataGridView1.Rows.Count; j++)
+            {
+                dataGridView1.Rows[j].Cells[0].Value = " Thêm mới ";
+            }
+        }
+        //Chọn file excel
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -53,12 +70,15 @@ namespace ImportDSKH
                 textBox1.Text = openFileDialog.FileName;
             }
         }
+        //import dữ liệu từ excel vào database
         private void button2_Click(object sender, EventArgs e)
         {
             using(var transaction = context.Database.BeginTransaction())
             {
                 try
                 {
+                    List<DanhSachKH> A = context.DanhSachKH.ToList();
+                    KTKH(A);
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
                         SqlConnection conn = new SqlConnection();
