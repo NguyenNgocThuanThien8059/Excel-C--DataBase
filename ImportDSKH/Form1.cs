@@ -82,7 +82,7 @@ namespace ImportDSKH
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
                         SqlConnection conn = new SqlConnection();
-                        conn.ConnectionString = ConfigurationManager.ConnectionStrings["KHList"].ConnectionString;
+                        conn.ConnectionString = ConfigurationManager.ConnectionStrings["Model12"].ConnectionString;
                         SqlCommand cmd = new SqlCommand();
                         cmd.CommandText = "ThemVaSua";
                         cmd.CommandType = CommandType.StoredProcedure;

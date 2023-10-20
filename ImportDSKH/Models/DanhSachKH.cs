@@ -18,10 +18,10 @@ namespace ImportDSKH.Models
 
         public DateTime? NgaySinh { get; set; }
 
-        [StringLength(10)]
+        [StringLength(15)]
         public string SDT { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string Email { get; set; }
 
         [StringLength(150)]
