@@ -42,20 +42,28 @@ namespace ImportDSKH
                 }
             }
         }
-        private void KTKH(List<DanhSachKH> B)
+        private void KTKH(string MaKH)
         {
-            int i = 0;
-            foreach(var item in B)
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                if(item.MaKH == dataGridView1.Rows[i].Cells[1].Value.ToString())
+                if(MaKH == dataGridView1.Rows[i].Cells[1].Value.ToString())
                 {
                     dataGridView1.Rows[i].Cells[0].Value = " Cập nhật ";
-                    i++;
                 }
             }
-            for(int j = i; j < dataGridView1.Rows.Count; j++)
+        }
+        private void KTDSKH(List<DanhSachKH> B)
+        {
+            foreach(var item in B)
             {
-                dataGridView1.Rows[j].Cells[0].Value = " Thêm mới ";
+                KTKH(item.MaKH);
+            }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if(dataGridView1.Rows[i].Cells[0].Value != " Cập nhật ")
+                {
+                    dataGridView1.Rows[i].Cells[0].Value = " Thêm mới ";
+                }
             }
         }
         //Chọn file excel
@@ -78,7 +86,7 @@ namespace ImportDSKH
                 try
                 {
                     List<DanhSachKH> A = context.DanhSachKH.ToList();
-                    KTKH(A);
+                    KTDSKH(A);
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
                         SqlConnection conn = new SqlConnection();
